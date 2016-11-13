@@ -1,0 +1,60 @@
+--- !ruby/object:Library
+books:
+- !ruby/object:Book
+  title: Depeache Mode
+  author: Sergii Jadan
+- !ruby/object:Book
+  title: The Hunger Games
+  author: Suzanne Collins
+- !ruby/object:Book
+  title: Romeo and Juliet
+  author: William Shakespeare
+- !ruby/object:Book
+  title: Macbeth
+  author: William Shakespeare
+orders:
+- !ruby/object:Order
+  book: Depeache Mode
+  reader: User 1
+  date: '2016-06-10'
+- !ruby/object:Order
+  book: Depeache Mode
+  reader: User 2
+  date: '2016-06-11'
+- !ruby/object:Order
+  book: The Hunger Games
+  reader: User 1
+  date: '2016-06-09'
+- !ruby/object:Order
+  book: Romeo and Juliet
+  reader: User 3
+  date: '2016-06-09'
+readers:
+- !ruby/object:Reader
+  name: User 1
+  email: user1@user.com
+  city: London
+  street: Blue
+  house: '55'
+- !ruby/object:Reader
+  name: User 2
+  email: user2@user.com
+  city: London
+  street: Green
+  house: '12'
+- !ruby/object:Reader
+  name: User 3
+  email: user3@user.com
+  city: London
+  street: Red
+  house: '255'
+authors:
+- !ruby/object:Author
+  name: Sergii Jadan
+  biography: Ukrainian poet, novelist, essayist, and translator.
+- !ruby/object:Author
+  name: Suzanne Collins
+  biography: American television writer and novelist
+- !ruby/object:Author
+  name: William Shakespeare
+  biography: English poet and playwright
