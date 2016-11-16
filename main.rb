@@ -1,18 +1,12 @@
 require './helpers/FileModule.rb'
 require_relative './library.rb'
 
-lib = FileModule.read_data
+FileModule.seed if FileModule.check_it
 
-if !lib
-  FileModule.seed_data
-  lib = FileModule.read_data
-end
+lib = FileModule.read
 
-puts 'Top readers:'
-puts lib.top_readers
+puts "Top reader: #{lib.top_reader}"
 
-puts 'Top books:'
-puts lib.top_books
+puts "Top book: #{ lib.top_book }"
 
-puts 'User orders statistic by one of tree popular book:'
-puts lib.top_books_statistic
+puts "User orders statistic of tree popular book: #{ lib.top_books_statistic }"

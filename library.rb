@@ -1,8 +1,3 @@
-require './entities/book.rb'
-require './entities/order.rb'
-require './entities/reader.rb'
-require './entities/author.rb'
-
 class Library
   attr_accessor :orders, :books, :readers, :authors
   
@@ -10,16 +5,17 @@ class Library
     @books, @orders, @readers, @authors = [], [], [], []
   end
 
-  def top_readers
-    @orders.group_by(&:reader).max_by{|readers| readers.count }.first
+  def top_reader
+    @orders.group_by(&:reader).max_by{|books, readers| readers.count }.first
   end  
   
-  def top_books
-    @orders.group_by(&:book).max_by{|books, orders| orders.count}.first
+  def top_book
+    @orders.group_by(&:book).max_by{|orders| orders.count }.first
   end
   
   def top_books_statistic
-    @orders.group_by(&:book).max_by{|orders, readers| readers.count}.count
+    top = @orders.group_by(&:book).max_by(3){|orders| orders.count}
+    top.map{|(book,orders)| orders}.flatten.map(&:reader).uniq.count
   end  
   
 end    

@@ -4,26 +4,29 @@ require './entities/book.rb'
 require './entities/order.rb'
 require './entities/reader.rb'
 require './entities/author.rb'
-require './library'
+require './library.rb'
 
 module FileModule
   
-  def self.save_data( data )
-    if File.exists?('./data.yml')
+  def self.save(data)
+    if check_it
       File.open('./data.yml','w+') do |f|
       f.write(data.to_yaml)
       end
     end
   end    
 
-  def self.read_data
-    if File.exists?('./data.yml')
-      YAML.load(File.open('./data.yml'))
-    end
+  def self.read
+      YAML.load(File.open('./data.yml')) if check_it
   end
   
-  def self.seed_data
-    @lib = Library.new()
+  def self.check_it
+    raise "Not found data.yml" if File.exists?('./data.yml').nil?
+    File.exists?('./data.yml')
+  end 
+  
+  def self.seed
+    @lib = Library.new
     
     @lib.books << Book.new('Depeache Mode', 'Sergii Jadan')
     @lib.books << Book.new('The Hunger Games', 'Suzanne Collins')
@@ -43,6 +46,7 @@ module FileModule
     @lib.authors << Author.new('Suzanne Collins', 'American television writer and novelist')
     @lib.authors << Author.new('William Shakespeare', 'English poet and playwright')
     
-    self.save_data(@lib)
+    save(@lib)
   end  
+  
 end  
