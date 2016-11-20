@@ -1,21 +1,28 @@
+require './helpers/FileModule.rb'
+
 class Library
+  include FileModule
   attr_accessor :orders, :books, :readers, :authors
   
-  def initialize()
+  def initialize
     @books, @orders, @readers, @authors = [], [], [], []
   end
 
   def top_reader
-    @orders.group_by(&:reader).max_by{|books, readers| readers.count }.first
+    sort_by(:reader).first
   end  
   
   def top_book
-    @orders.group_by(&:book).max_by{|orders| orders.count }.first
+    sort_by(:book).first
   end
   
   def top_books_statistic
-    top = @orders.group_by(&:book).max_by(3){|orders| orders.count}
-    top.map{|(book,orders)| orders}.flatten.map(&:reader).uniq.count
+    top = sort_by(:reader, 3)
+    top.map{|(__ , order)| order}.flatten.map(&:reader).uniq.count
+  end  
+  
+  def sort_by(entity, quant = nil)
+    @orders.group_by( &entity ).max_by(quant){ |__ , order| order.count }
   end  
   
 end    
